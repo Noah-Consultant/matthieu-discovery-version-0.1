@@ -1,123 +1,469 @@
-
-<h2 class="sr-only">Analyse interactive des pain points de Matthieu TATIBOUET avec scoring et modules consulting.</h2>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Restitution · Matthieu TATIBOUET · NOAH Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-.hdr{font-size:18px;font-weight:500;color:var(--color-text-primary);margin:0 0 2px}
-.sub{font-size:13px;color:var(--color-text-secondary);margin:0 0 20px}
-.sl{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px}
-.pc{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin:0 0 10px;cursor:pointer;transition:border-color .2s}
-.pc:hover{border-color:var(--color-border-secondary)}
-.pc .chevron{display:inline-block;transition:transform .2s;font-size:12px;color:var(--color-text-tertiary);margin-left:4px}
-.pc.open .chevron{transform:rotate(90deg)}
-.pc .detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.pc.open .detail{max-height:400px}
-.row{display:flex;align-items:center;gap:10px}
-.badge{font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);font-weight:500}
-.b-c{background:var(--color-background-danger);color:var(--color-text-danger)}
-.b-h{background:var(--color-background-warning);color:var(--color-text-warning)}
-.b-m{background:var(--color-background-info);color:var(--color-text-info)}
-.pn{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
-.ps{font-size:14px;font-weight:500;color:var(--color-text-secondary)}
-.sg{display:flex;gap:6px;margin:10px 0 0}
-.sc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:4px 8px;text-align:center;flex:1}
-.sc-l{font-size:10px;color:var(--color-text-tertiary)}
-.sc-v{font-size:13px;font-weight:500;color:var(--color-text-primary)}
-.ev{font-size:12px;color:var(--color-text-secondary);font-style:italic;margin:10px 0 0;line-height:1.5}
-.mod{border-left:3px solid var(--color-border-info);padding:6px 12px;margin:10px 0 0;border-radius:0}
-.mod-t{font-size:12px;font-weight:500;color:var(--color-text-info)}
-.mod-d{font-size:11px;color:var(--color-text-secondary);margin:2px 0 0}
-.ad{text-align:center;color:var(--color-text-tertiary);font-size:16px;margin:2px 0}
-.synth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px}
-.scard{border-radius:var(--border-radius-lg);padding:14px;text-align:center}
-.sc-a{background:var(--color-background-danger)}
-.sc-b{background:var(--color-background-warning)}
-.sc-c{background:var(--color-background-info)}
-.scard h3{font-size:14px;font-weight:500;margin:0}
-.scard p{font-size:11px;margin:3px 0 0}
-.muted{opacity:.65}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0c;--bg2:#131318;--bg3:#1c1c24;
+  --fg:#e8e6e1;--fg2:#9d9b95;--fg3:#5c5a56;
+  --accent:#d4622a;--accent2:#e8944a;
+  --blue:#4a8fd4;--teal:#3db89a;--amber:#d4a03a;
+  --red:#d44a4a;--purple:#8a6ad4;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--fg);font-family:var(--sans)}
+body{overflow-x:hidden}
+::selection{background:var(--accent);color:#fff}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem 1.5rem 3rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(212,98,42,.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(74,143,212,.08) 0%,transparent 50%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(212,98,42,.3);padding:.35rem .75rem;border-radius:2rem;width:fit-content;margin-bottom:1.5rem}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,7vw,4.5rem);line-height:1.05;font-weight:400;margin-bottom:1rem}
+.hero h1 em{font-style:italic;color:var(--accent2)}
+.hero-sub{font-size:1rem;color:var(--fg2);line-height:1.6;max-width:540px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.meta-chip{font-family:var(--mono);font-size:.7rem;color:var(--fg3);border:1px solid var(--bg3);padding:.3rem .7rem;border-radius:4px;letter-spacing:.03em}
+.scroll-cue{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--fg3);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;animation:float 2.5s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.scroll-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--fg3),transparent)}
+
+section{padding:4rem 1.5rem}
+.section-label{font-family:var(--mono);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.8rem);line-height:1.15;margin-bottom:1.5rem}
+
+.context-grid{display:grid;gap:.75rem;margin-bottom:2rem}
+.ctx-card{background:var(--bg2);border:1px solid var(--bg3);border-radius:12px;padding:1.25rem;transition:border-color .3s}
+.ctx-card:hover{border-color:rgba(212,98,42,.3)}
+.ctx-icon{font-size:1.5rem;margin-bottom:.5rem}
+.ctx-label{font-size:.7rem;font-family:var(--mono);color:var(--fg3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.ctx-value{font-size:1rem;font-weight:500;color:var(--fg);line-height:1.4}
+
+.workflow{position:relative;padding-left:2rem}
+.workflow::before{content:'';position:absolute;left:.5rem;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--blue),var(--teal),var(--purple))}
+.wf-step{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+.wf-dot{position:absolute;left:-1.75rem;top:.25rem;width:12px;height:12px;border-radius:50%;border:2px solid var(--accent);background:var(--bg)}
+.wf-step:nth-child(2) .wf-dot{border-color:var(--accent2)}
+.wf-step:nth-child(3) .wf-dot{border-color:var(--blue)}
+.wf-step:nth-child(4) .wf-dot{border-color:var(--teal)}
+.wf-step:nth-child(5) .wf-dot{border-color:var(--purple)}
+.wf-step:nth-child(6) .wf-dot{border-color:var(--amber)}
+.wf-title{font-weight:600;font-size:.95rem;margin-bottom:.25rem}
+.wf-desc{font-size:.8rem;color:var(--fg2);line-height:1.5}
+.wf-tools{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.wf-tag{font-family:var(--mono);font-size:.6rem;color:var(--fg3);background:var(--bg3);padding:.2rem .5rem;border-radius:3px}
+
+.pain-list{display:flex;flex-direction:column;gap:1rem}
+.pain{background:var(--bg2);border:1px solid var(--bg3);border-radius:14px;overflow:hidden;transition:border-color .3s,box-shadow .3s;cursor:pointer}
+.pain.open{border-color:rgba(212,98,42,.35);box-shadow:0 8px 40px rgba(0,0,0,.4)}
+.pain-header{display:flex;align-items:center;gap:.75rem;padding:1.25rem}
+.pain-rank{font-family:var(--mono);font-size:1.8rem;font-weight:700;line-height:1;min-width:2.5rem}
+.pain-rank.crit{color:var(--red)}
+.pain-rank.high{color:var(--amber)}
+.pain-rank.med{color:var(--fg3)}
+.pain-info{flex:1;min-width:0}
+.pain-id{font-family:var(--mono);font-size:.6rem;color:var(--fg3);letter-spacing:.05em}
+.pain-name{font-size:.95rem;font-weight:600;line-height:1.3;margin-top:.15rem}
+.pain-prio{display:flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.8rem;font-weight:600}
+.pain-prio .bar{height:4px;border-radius:2px;width:48px;background:var(--bg3);overflow:hidden;position:relative}
+.pain-prio .bar-fill{position:absolute;inset:0;border-radius:2px;transform-origin:left;transition:transform .6s var(--ease)}
+.pain-chevron{width:20px;height:20px;color:var(--fg3);transition:transform .3s var(--ease);flex-shrink:0}
+.pain.open .pain-chevron{transform:rotate(180deg)}
+.pain-body{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.pain.open .pain-body{max-height:800px}
+.pain-content{padding:0 1.25rem 1.5rem}
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem}
+.score-cell{background:var(--bg3);border-radius:8px;padding:.6rem .5rem;text-align:center}
+.score-label{font-size:.6rem;font-family:var(--mono);color:var(--fg3);text-transform:uppercase;letter-spacing:.05em}
+.score-val{font-size:1.2rem;font-weight:700;margin-top:.15rem}
+.score-val.high{color:var(--accent2)}
+.score-val.mid{color:var(--amber)}
+.score-val.low{color:var(--fg3)}
+.quote{position:relative;font-style:italic;color:var(--fg2);font-size:.85rem;line-height:1.6;padding-left:1rem;border-left:2px solid var(--accent);margin:1rem 0}
+.solution-card{background:linear-gradient(135deg,rgba(212,98,42,.08),rgba(74,143,212,.06));border:1px solid rgba(212,98,42,.15);border-radius:10px;padding:1rem;margin-top:.75rem}
+.sol-label{font-family:var(--mono);font-size:.6rem;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
+.sol-title{font-size:.9rem;font-weight:600;margin-bottom:.25rem}
+.sol-desc{font-size:.8rem;color:var(--fg2);line-height:1.5}
+.sol-tags{display:flex;gap:.35rem;margin-top:.5rem;flex-wrap:wrap}
+.sol-tag{font-family:var(--mono);font-size:.55rem;padding:.2rem .5rem;border-radius:3px;border:1px solid var(--bg3);color:var(--fg3)}
+
+.modules-grid{display:flex;flex-direction:column;gap:1rem}
+.module-card{position:relative;border-radius:16px;padding:1.75rem 1.5rem;overflow:hidden;border:1px solid transparent}
+.module-card::before{content:'';position:absolute;inset:0;opacity:.12;pointer-events:none}
+.module-a{background:var(--bg2);border-color:rgba(212,68,42,.25)}
+.module-a::before{background:linear-gradient(135deg,var(--red),var(--accent))}
+.module-b{background:var(--bg2);border-color:rgba(212,160,58,.25)}
+.module-b::before{background:linear-gradient(135deg,var(--amber),var(--accent2))}
+.module-c{background:var(--bg2);border-color:rgba(74,143,212,.25)}
+.module-c::before{background:linear-gradient(135deg,var(--blue),var(--teal))}
+.mod-badge{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:3px;display:inline-block;margin-bottom:.75rem}
+.module-a .mod-badge{background:rgba(212,74,74,.15);color:var(--red)}
+.module-b .mod-badge{background:rgba(212,160,58,.15);color:var(--amber)}
+.module-c .mod-badge{background:rgba(74,143,212,.15);color:var(--blue)}
+.mod-title{font-family:var(--serif);font-size:1.3rem;margin-bottom:.5rem}
+.mod-desc{font-size:.85rem;color:var(--fg2);line-height:1.6;margin-bottom:1rem}
+.mod-deliverables{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.mod-deliverables li{font-size:.8rem;color:var(--fg2);padding-left:1.25rem;position:relative;line-height:1.4}
+.mod-deliverables li::before{content:'\2192';position:absolute;left:0;color:var(--accent)}
+
+.impact-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:2rem}
+.impact-card{background:var(--bg2);border-radius:12px;padding:1.25rem;text-align:center;border:1px solid var(--bg3)}
+.impact-num{font-family:var(--serif);font-size:2rem;color:var(--accent2)}
+.impact-label{font-size:.75rem;color:var(--fg2);margin-top:.25rem;line-height:1.3}
+
+.steps-list{counter-reset:step}
+.step-item{counter-increment:step;display:flex;gap:1rem;margin-bottom:1.75rem;align-items:flex-start}
+.step-num{font-family:var(--mono);font-size:.7rem;color:var(--accent);border:1px solid rgba(212,98,42,.3);width:2rem;height:2rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem}
+.step-num::after{content:counter(step)}
+.step-text{font-size:.9rem;line-height:1.5}
+.step-text strong{color:var(--fg);font-weight:600}
+.step-text span{color:var(--fg2)}
+
+footer{padding:3rem 1.5rem;text-align:center;border-top:1px solid var(--bg3)}
+footer p{font-size:.7rem;color:var(--fg3);font-family:var(--mono)}
+
+.radar-wrap{position:relative;width:100%;max-width:320px;margin:1.5rem auto}
+
+.progress-nav{position:fixed;right:.75rem;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:.5rem}
+.pn-dot{width:8px;height:8px;border-radius:50%;background:var(--bg3);border:1px solid var(--fg3);transition:all .3s;cursor:pointer}
+.pn-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 8px rgba(212,98,42,.4)}
+
+@media(min-width:640px){
+  section{padding:5rem 3rem}
+  .hero{padding:3rem 3rem 4rem}
+  .context-grid{grid-template-columns:repeat(2,1fr)}
+  .impact-row{grid-template-columns:repeat(4,1fr)}
+  .score-grid{grid-template-columns:repeat(6,1fr)}
+}
+@media(min-width:960px){
+  section{padding:6rem 4rem;max-width:900px;margin:0 auto}
+  .hero{max-width:900px;margin:0 auto;padding:4rem 4rem 5rem}
+  .context-grid{grid-template-columns:repeat(4,1fr)}
+  .modules-grid{flex-direction:row}
+  .module-card{flex:1}
+}
 </style>
+</head>
+<body>
 
-<div class="hdr">Diagnostic Matthieu TATIBOUET</div>
-<div class="sub">Global Grain Manager · Roquette · 23/03/2026 · 117 min</div>
+<nav class="progress-nav" aria-label="Navigation sections">
+  <div class="pn-dot active" onclick="scrollToSection(0)" title="Accueil"></div>
+  <div class="pn-dot" onclick="scrollToSection(1)" title="Contexte"></div>
+  <div class="pn-dot" onclick="scrollToSection(2)" title="Workflow"></div>
+  <div class="pn-dot" onclick="scrollToSection(3)" title="Pain points"></div>
+  <div class="pn-dot" onclick="scrollToSection(4)" title="Modules"></div>
+  <div class="pn-dot" onclick="scrollToSection(5)" title="Next steps"></div>
+</nav>
 
-<div class="sl">Pain points par priorité — cliquez pour déplier</div>
+<header class="hero" data-section="0">
+  <div class="reveal">
+    <div class="hero-badge"><span>Discovery call &middot; Restitution</span></div>
+  </div>
+  <h1 class="reveal reveal-delay-1">Diagnostic<br><em>data &amp; d&eacute;cision</em></h1>
+  <p class="hero-sub reveal reveal-delay-2">Analyse des pain points identifi&eacute;s lors de l&rsquo;entretien d&eacute;couverte avec Matthieu TATIBOUET, Global Grain Manager chez Roquette Fr&egrave;res.</p>
+  <div class="hero-meta reveal reveal-delay-3">
+    <span class="meta-chip">23 mars 2026</span>
+    <span class="meta-chip">117 min</span>
+    <span class="meta-chip">8 pain points</span>
+    <span class="meta-chip">3 modules propos&eacute;s</span>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</header>
 
-<div class="pc" data-toggle>
- <div class="row"><span class="badge b-c">Critique</span><span class="pn">P2 · Data-prep vs analyse</span><span class="ps">4.75</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
-  <div class="ev">"Tu passes trop de temps à aller chercher la donnée… plutôt qu'à vraiment analyser et décider."</div>
-  <div class="mod"><div class="mod-t">Module A — Pilote "Excel & data-prep"</div><div class="mod-d">Automatiser 60-80% de la data-prep sur 1-2 fichiers critiques</div></div>
- </div>
-</div>
-<div class="ad">↓</div>
+<section data-section="1">
+  <p class="section-label reveal">01 &middot; Contexte</p>
+  <h2 class="section-title reveal reveal-delay-1">Un m&eacute;tier &agrave; l&rsquo;intersection<br>de la data et du terrain</h2>
+  <div class="context-grid">
+    <div class="ctx-card reveal reveal-delay-1">
+      <div class="ctx-icon">&#127981;</div>
+      <div class="ctx-label">Industrie</div>
+      <div class="ctx-value">Premi&egrave;re transformation de mati&egrave;res premi&egrave;res agricoles</div>
+    </div>
+    <div class="ctx-card reveal reveal-delay-2">
+      <div class="ctx-icon">&#127758;</div>
+      <div class="ctx-label">P&eacute;rim&egrave;tre</div>
+      <div class="ctx-value">5 continents, multi-usines, &eacute;quipes locales US, Espagne, Inde, Chine&hellip;</div>
+    </div>
+    <div class="ctx-card reveal reveal-delay-3">
+      <div class="ctx-icon">&#9878;</div>
+      <div class="ctx-label">R&ocirc;le</div>
+      <div class="ctx-value">Interm&eacute;diation corporate &harr; local, challenge &amp; support des acheteurs</div>
+    </div>
+    <div class="ctx-card reveal reveal-delay-4">
+      <div class="ctx-icon">&#128202;</div>
+      <div class="ctx-label">Stack</div>
+      <div class="ctx-value">SAP/ERP, Excel massif, Power BI partiel, Teams, sources de march&eacute;</div>
+    </div>
+  </div>
+</section>
 
-<div class="pc" data-toggle>
- <div class="row"><span class="badge b-c">Critique</span><span class="pn">P1 · Excels "monstres" & fiabilité</span><span class="ps">4.50</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
-  <div class="ev">"J'ai des fichiers qui sont devenus des monstres… des trucs un peu incontrôlables."</div>
-  <div class="mod"><div class="mod-t">Module A — Refonte fichiers critiques</div><div class="mod-d">Cartographie + nouvelle version structurée + contrôles de cohérence</div></div>
- </div>
-</div>
-<div class="ad">↓</div>
+<section data-section="2">
+  <p class="section-label reveal">02 &middot; Workflow quotidien</p>
+  <h2 class="section-title reveal reveal-delay-1">De la collecte &agrave; la d&eacute;cision</h2>
+  <div class="workflow">
+    <div class="wf-step reveal">
+      <div class="wf-dot"></div>
+      <div class="wf-title">Collecte march&eacute; &amp; internes</div>
+      <div class="wf-desc">Donn&eacute;es SAP, infos march&eacute; externes, retours des &eacute;quipes locales par mail et Teams.</div>
+      <div class="wf-tools"><span class="wf-tag">SAP</span><span class="wf-tag">Agences prix</span><span class="wf-tag">Teams</span></div>
+    </div>
+    <div class="wf-step reveal reveal-delay-1">
+      <div class="wf-dot"></div>
+      <div class="wf-title">Pr&eacute;paration &amp; consolidation</div>
+      <div class="wf-desc">Export, nettoyage et consolidation multi-sources dans des fichiers Excel. C&rsquo;est ici que la douleur est maximale.</div>
+      <div class="wf-tools"><span class="wf-tag">Excel</span><span class="wf-tag">Exports SAP</span><span class="wf-tag">Fichiers locaux</span></div>
+    </div>
+    <div class="wf-step reveal reveal-delay-2">
+      <div class="wf-dot"></div>
+      <div class="wf-title">Reporting &amp; KPI</div>
+      <div class="wf-desc">Relance des &eacute;quipes, collecte d&rsquo;indicateurs, remplissage des tableaux pour finance et contr&ocirc;le de gestion.</div>
+      <div class="wf-tools"><span class="wf-tag">Excel</span><span class="wf-tag">Emails</span><span class="wf-tag">Teams</span></div>
+    </div>
+    <div class="wf-step reveal reveal-delay-3">
+      <div class="wf-dot"></div>
+      <div class="wf-title">Analyse &amp; d&eacute;cision</div>
+      <div class="wf-desc">Combiner avis de march&eacute;, besoins industriels, contraintes logistiques et qualit&eacute;.</div>
+      <div class="wf-tools"><span class="wf-tag">Excel consolid&eacute;</span><span class="wf-tag">R&eacute;unions Teams</span></div>
+    </div>
+    <div class="wf-step reveal reveal-delay-4">
+      <div class="wf-dot"></div>
+      <div class="wf-title">Coordination globale &amp; locale</div>
+      <div class="wf-desc">R&eacute;unions hebdo avec chaque &eacute;quipe locale et l&rsquo;&eacute;quipe globale pour piloter achats et strat&eacute;gie.</div>
+      <div class="wf-tools"><span class="wf-tag">Teams</span><span class="wf-tag">Slides</span></div>
+    </div>
+    <div class="wf-step reveal">
+      <div class="wf-dot"></div>
+      <div class="wf-title">R&eacute;unions cross-fonctions marge</div>
+      <div class="wf-desc">Point hebdo mati&egrave;res premi&egrave;res + &eacute;nergie + sales + contr&ocirc;le de gestion.</div>
+      <div class="wf-tools"><span class="wf-tag">Teams</span><span class="wf-tag">Rapports marge</span></div>
+    </div>
+  </div>
+</section>
 
-<div class="pc" data-toggle>
- <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P3 · Consolidation multi-pays</span><span class="ps">3.88</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
-  <div class="ev">"Les gens ont des outils différents selon les pays… ça complique vraiment la consolidation."</div>
-  <div class="mod"><div class="mod-t">Module B — Modèle de données global</div><div class="mod-d">Kit reporting standard + harmonisation progressive des équipes locales</div></div>
- </div>
-</div>
-<div class="ad">↓</div>
+<section data-section="3">
+  <p class="section-label reveal">03 &middot; Pain points</p>
+  <h2 class="section-title reveal reveal-delay-1">Classement par priorit&eacute;</h2>
+  <p class="reveal reveal-delay-2" style="font-size:.85rem;color:var(--fg2);margin-bottom:2rem;line-height:1.6">Scoring multidimensionnel : douleur, fr&eacute;quence, impact business, urgence per&ccedil;ue et willingness-to-pay. Cliquez sur chaque item pour voir le d&eacute;tail.</p>
+  <div class="radar-wrap reveal">
+    <canvas id="radarChart" width="320" height="320" role="img" aria-label="Radar chart comparing top 4 pain points across 5 dimensions">Radar chart of P2, P1, P3, P7 pain scores.</canvas>
+  </div>
+  <div class="pain-list" id="painList"></div>
+</section>
 
-<div class="pc" data-toggle>
- <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P7 · Manque de temps proactif</span><span class="ps">3.50</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
-  <div class="ev">"Je suis trop dans le réactif… et pas assez dans le proactif."</div>
-  <div class="mod"><div class="mod-t">Module C — Cadre coaching acheteurs</div><div class="mod-d">Rituels, supports et contenus pour la communauté achats</div></div>
- </div>
-</div>
-<div class="ad">↓</div>
+<section data-section="4">
+  <p class="section-label reveal">04 &middot; Proposition</p>
+  <h2 class="section-title reveal reveal-delay-1">Trois modules,<br><em style="font-family:var(--serif);color:var(--accent2)">un pilote cibl&eacute;</em></h2>
+  <div class="modules-grid">
+    <div class="module-card module-a reveal">
+      <div class="mod-badge">Priorit&eacute; 1 &middot; Pilote</div>
+      <div class="mod-title">Excel &amp; data-prep</div>
+      <div class="mod-desc">Automatiser 60-80% de la pr&eacute;paration de donn&eacute;es sur les 1-2 fichiers critiques. Rendre la mise &agrave; jour quasi &laquo;&nbsp;bouton&nbsp;&raquo;.</div>
+      <ul class="mod-deliverables">
+        <li>Cartographie des Excels &laquo;&nbsp;monstres&nbsp;&raquo;</li>
+        <li>Nouvelle version structur&eacute;e + automatisations</li>
+        <li>Contr&ocirc;les de coh&eacute;rence visibles</li>
+        <li>Mini-guide + session prise en main</li>
+      </ul>
+    </div>
+    <div class="module-card module-b reveal reveal-delay-1">
+      <div class="mod-badge">Phase 2</div>
+      <div class="mod-title">Consolidation &amp; KPI</div>
+      <div class="mod-desc">Mod&egrave;le de donn&eacute;es global minimal et kit de reporting standard pour les &eacute;quipes locales.</div>
+      <ul class="mod-deliverables">
+        <li>Template de donn&eacute;es harmonis&eacute;</li>
+        <li>Formulaires KPI standardis&eacute;s</li>
+        <li>Rappels automatiques de collecte</li>
+        <li>Dashboard consolidation multi-pays</li>
+      </ul>
+    </div>
+    <div class="module-card module-c reveal reveal-delay-2">
+      <div class="mod-badge">Phase 3</div>
+      <div class="mod-title">Coaching acheteurs</div>
+      <div class="mod-desc">Cadre minimal de coaching et animation de la communaut&eacute; achats pour amplifier le r&ocirc;le de &laquo;&nbsp;fluidificateur&nbsp;&raquo;.</div>
+      <ul class="mod-deliverables">
+        <li>Rituels structur&eacute;s de partage</li>
+        <li>Supports de bonnes pratiques</li>
+        <li>Contenus de mont&eacute;e en comp&eacute;tences</li>
+        <li>Feedback loops formalis&eacute;s</li>
+      </ul>
+    </div>
+  </div>
+  <div class="impact-row reveal">
+    <div class="impact-card">
+      <div class="impact-num" data-count="80" data-suffix="%">0</div>
+      <div class="impact-label">de data-prep automatisable</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num" data-count="5" data-suffix="h">0</div>
+      <div class="impact-label">par semaine r&eacute;cup&eacute;r&eacute;es</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num" data-count="2">0</div>
+      <div class="impact-label">fichiers critiques cibl&eacute;s</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num" data-count="8">0</div>
+      <div class="impact-label">pain points identifi&eacute;s</div>
+    </div>
+  </div>
+</section>
 
-<div class="pc" data-toggle>
- <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P8 · Reporting KPI chronophage</span><span class="ps">3.50</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
-  <div class="ev">"Je passe beaucoup de temps à relancer les équipes locales pour qu'elles remplissent les KPI."</div>
-  <div class="mod"><div class="mod-t">Module B — Automatisation collecte KPI</div><div class="mod-d">Formulaires standardisés + rappels automatiques (écosystème Microsoft)</div></div>
- </div>
-</div>
-<div class="ad">↓</div>
+<section data-section="5">
+  <p class="section-label reveal">05 &middot; Prochaines &eacute;tapes</p>
+  <h2 class="section-title reveal reveal-delay-1">Comment avancer</h2>
+  <div class="steps-list">
+    <div class="step-item reveal">
+      <div class="step-num"></div>
+      <div class="step-text"><strong>Valider le diagnostic</strong><br><span>Parcourir cette restitution ensemble et confirmer les priorit&eacute;s identifi&eacute;es.</span></div>
+    </div>
+    <div class="step-item reveal reveal-delay-1">
+      <div class="step-num"></div>
+      <div class="step-text"><strong>Cadrer le pilote Module A</strong><br><span>Identifier les 1-2 fichiers Excel &laquo;&nbsp;monstres&nbsp;&raquo; prioritaires et d&eacute;finir le p&eacute;rim&egrave;tre.</span></div>
+    </div>
+    <div class="step-item reveal reveal-delay-2">
+      <div class="step-num"></div>
+      <div class="step-text"><strong>Sprint d&rsquo;audit (2 semaines)</strong><br><span>Cartographie d&eacute;taill&eacute;e des fichiers, des flux de donn&eacute;es et des points de friction.</span></div>
+    </div>
+    <div class="step-item reveal reveal-delay-3">
+      <div class="step-num"></div>
+      <div class="step-text"><strong>Livraison &amp; it&eacute;ration</strong><br><span>Nouvelle version des fichiers + automatisations + session de prise en main. Mesure du temps gagn&eacute;.</span></div>
+    </div>
+  </div>
+</section>
 
-<div class="pc muted" data-toggle>
- <div class="row"><span class="badge b-m">Moyen</span><span class="pn">P5 · Jeux politiques & rétention d'info</span><span class="ps">3.25</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">2</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">1</div></div></div>
-  <div class="ev">Hors scope pilote — levier indirect via la transparence data des modules A et B</div>
- </div>
-</div>
+<footer>
+  <p>NOAH Consultant &middot; Stanislas BASQUIN &middot; Avril 2026</p>
+  <p style="margin-top:.5rem;opacity:.5">Ce document est confidentiel</p>
+</footer>
 
-<div class="pc muted" data-toggle>
- <div class="row"><span class="badge b-m">Moyen</span><span class="pn">P4 · Charge cognitive acheteurs</span><span class="ps">3.13</span><span class="chevron">▶</span></div>
- <div class="detail">
-  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
-  <div class="ev">Bénéfice indirect — allègement de la bande passante via Module A</div>
- </div>
-</div>
-
-<div class="sl" style="margin-top:20px">Synthèse de l'offre pilote</div>
-<div class="synth">
- <div class="scard sc-a"><h3 style="color:var(--color-text-danger)">Module A</h3><p style="color:var(--color-text-danger)">Excel & data-prep</p><p style="color:var(--color-text-secondary)">P1 + P2 · Quick win</p></div>
- <div class="scard sc-b"><h3 style="color:var(--color-text-warning)">Module B</h3><p style="color:var(--color-text-warning)">Consolidation & KPI</p><p style="color:var(--color-text-secondary)">P3 + P8 · Phase 2</p></div>
- <div class="scard sc-c"><h3 style="color:var(--color-text-info)">Module C</h3><p style="color:var(--color-text-info)">Coaching acheteurs</p><p style="color:var(--color-text-secondary)">P7 · Phase 2</p></div>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-document.querySelectorAll('[data-toggle]').forEach(function(card) {
-  card.addEventListener('click', function() {
-    this.classList.toggle('open');
-  });
+const painPoints=[
+{id:'P2',name:'Data-prep vs analyse',statement:"Temps excessif consacr\u00e9 \u00e0 la pr\u00e9paration des donn\u00e9es au d\u00e9triment de l\u2019analyse et de la r\u00e9flexion strat\u00e9gique.",priority:4.75,tier:'crit',scores:{pain:5,freq:5,impact:5,urgence:4,wtp:3},quote:"\u00abTu passes trop de temps \u00e0 aller chercher la donn\u00e9e, \u00e0 la v\u00e9rifier, \u00e0 la mettre en forme, plut\u00f4t qu\u2019\u00e0 vraiment analyser et \u00e0 d\u00e9cider.\u00bb",module:'Module A',solTitle:'Audit & redesign data-prep',solDesc:"Automatiser le processus d\u2019alimentation des vues d\u2019exposition et de position.",tags:['consulting','moyen terme']},
+{id:'P1',name:'Excels \u00abmonstres\u00bb & fiabilit\u00e9',statement:"Forte d\u00e9pendance \u00e0 des fichiers Excel volumineux et manuels, g\u00e9n\u00e9rant lenteur, erreurs et anxi\u00e9t\u00e9.",priority:4.50,tier:'crit',scores:{pain:5,freq:5,impact:4,urgence:4,wtp:3},quote:"\u00abJ\u2019ai des fichiers qui sont devenus des monstres\u2026 des trucs un peu incontr\u00f4lables.\u00bb",module:'Module A',solTitle:'Refonte fichiers critiques',solDesc:"Cartographie + nouvelle version structur\u00e9e + contr\u00f4les de coh\u00e9rence.",tags:['hybride','moyen terme']},
+{id:'P3',name:'Consolidation multi-pays',statement:"Donn\u00e9es locales h\u00e9t\u00e9rog\u00e8nes rendant lourde l\u2019obtention d\u2019une vue globale des positions.",priority:3.88,tier:'high',scores:{pain:4,freq:4,impact:4,urgence:3,wtp:3},quote:"\u00abLes gens ont des outils diff\u00e9rents selon les pays\u2026 \u00e7a complique vraiment la consolidation.\u00bb",module:'Module B',solTitle:'Mod\u00e8le de donn\u00e9es global',solDesc:"Kit reporting standard + harmonisation progressive des formats locaux.",tags:['consulting','moyen terme']},
+{id:'P7',name:'Manque de temps proactif',statement:"Trop absorb\u00e9 par le r\u00e9actif pour coacher et am\u00e9liorer les pratiques des acheteurs locaux.",priority:3.50,tier:'high',scores:{pain:4,freq:4,impact:4,urgence:3,wtp:2},quote:"\u00abJe suis trop dans le r\u00e9actif, trop dans l\u2019op\u00e9rationnel, et pas assez dans le proactif.\u00bb",module:'Module C',solTitle:'Cadre coaching acheteurs',solDesc:"Rituels, supports et contenus pour amplifier le r\u00f4le de fluidificateur.",tags:['consulting','moyen terme']},
+{id:'P8',name:'Reporting KPI chronophage',statement:"Collecte d\u2019indicateurs chronophage avec relances multiples et saisie manuelle peu valorisante.",priority:3.50,tier:'high',scores:{pain:4,freq:4,impact:4,urgence:3,wtp:2},quote:"\u00abJe passe beaucoup de temps \u00e0 relancer les \u00e9quipes locales pour qu\u2019elles remplissent les KPI.\u00bb",module:'Module B',solTitle:'Automatisation collecte KPI',solDesc:"Formulaires standardis\u00e9s + rappels automatiques dans l\u2019\u00e9cosyst\u00e8me Microsoft.",tags:['hybride','moyen terme']},
+{id:'P5',name:'Jeux politiques & r\u00e9tention',statement:"Circulation d\u2019information frein\u00e9e par des baronnies et des jeux de pouvoir internes.",priority:3.25,tier:'med',scores:{pain:4,freq:4,impact:4,urgence:2,wtp:1},quote:"\u00abC\u2019est un peu un panier de crabes\u2026 des petites baronnies internes.\u00bb",module:'Indirect',solTitle:'Levier indirect',solDesc:"La transparence data des modules A et B r\u00e9duit les asym\u00e9tries d\u2019information.",tags:['structurel','long terme']},
+{id:'P4',name:'Charge cognitive acheteurs',statement:"Multiplicit\u00e9 de sujets op\u00e9rationnels cr\u00e9ant une surcharge pour les acheteurs locaux.",priority:3.13,tier:'med',scores:{pain:3,freq:3,impact:4,urgence:3,wtp:2},quote:"\u00abCe sont des gens qui courent \u00e0 10\u202f000 \u00e0 l\u2019heure, ils ont toujours 15\u202f000 trucs \u00e0 g\u00e9rer.\u00bb",module:'Indirect',solTitle:'All\u00e8gement indirect',solDesc:"Le gain de temps sur la data-prep lib\u00e8re de la bande passante.",tags:['indirect']},
+{id:'P6',name:'Barri\u00e8res multiculturelles',statement:"Difficult\u00e9s de langue, ego et styles de communication d\u00e9gradant certaines r\u00e9unions globales.",priority:2.88,tier:'med',scores:{pain:3,freq:3,impact:3,urgence:2,wtp:2},quote:"\u00abTu as toutes les frictions li\u00e9es \u00e0 l\u2019humain multiculturel\u2026 ego, diff\u00e9rences de culture.\u00bb",module:'Indirect',solTitle:'B\u00e9n\u00e9fice collat\u00e9ral',solDesc:"Des donn\u00e9es plus claires r\u00e9duisent les malentendus cross-culturels.",tags:['structurel','long terme']},
+];
+
+const list=document.getElementById('painList');
+painPoints.forEach((p,i)=>{
+  const barW=(p.priority/5)*100;
+  const barColor=p.tier==='crit'?'var(--red)':p.tier==='high'?'var(--amber)':'var(--fg3)';
+  const sc=v=>v>=5?'high':v>=4?'mid':'low';
+  const card=document.createElement('div');
+  card.className='pain reveal'+(i>0?` reveal-delay-${Math.min(i,4)}`:'');
+  card.onclick=()=>card.classList.toggle('open');
+  card.innerHTML=`
+    <div class="pain-header">
+      <div class="pain-rank ${p.tier}">${i+1}</div>
+      <div class="pain-info">
+        <div class="pain-id">${p.id} &middot; ${p.module}</div>
+        <div class="pain-name">${p.name}</div>
+      </div>
+      <div class="pain-prio">
+        <span>${p.priority.toFixed(2)}</span>
+        <div class="bar"><div class="bar-fill" style="background:${barColor};transform:scaleX(${barW/100})"></div></div>
+      </div>
+      <svg class="pain-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l5 5 5-5"/></svg>
+    </div>
+    <div class="pain-body"><div class="pain-content">
+      <p style="font-size:.8rem;color:var(--fg2);line-height:1.5;margin-bottom:1rem">${p.statement}</p>
+      <div class="score-grid">
+        <div class="score-cell"><div class="score-label">Douleur</div><div class="score-val ${sc(p.scores.pain)}">${p.scores.pain}</div></div>
+        <div class="score-cell"><div class="score-label">Fr&eacute;quence</div><div class="score-val ${sc(p.scores.freq)}">${p.scores.freq}</div></div>
+        <div class="score-cell"><div class="score-label">Impact</div><div class="score-val ${sc(p.scores.impact)}">${p.scores.impact}</div></div>
+        <div class="score-cell"><div class="score-label">Urgence</div><div class="score-val ${sc(p.scores.urgence)}">${p.scores.urgence}</div></div>
+        <div class="score-cell"><div class="score-label">WTP</div><div class="score-val ${sc(p.scores.wtp)}">${p.scores.wtp}</div></div>
+        <div class="score-cell"><div class="score-label">Priorit&eacute;</div><div class="score-val ${sc(Math.round(p.priority))}">${p.priority.toFixed(2)}</div></div>
+      </div>
+      <div class="quote">${p.quote}</div>
+      <div class="solution-card">
+        <div class="sol-label">Solution propos&eacute;e</div>
+        <div class="sol-title">${p.solTitle}</div>
+        <div class="sol-desc">${p.solDesc}</div>
+        <div class="sol-tags">${p.tags.map(t=>'<span class="sol-tag">'+t+'</span>').join('')}</div>
+      </div>
+    </div></div>`;
+  list.appendChild(card);
 });
+
+const top4=painPoints.slice(0,4);
+new Chart(document.getElementById('radarChart'),{
+  type:'radar',
+  data:{
+    labels:['Douleur','Fr\u00e9quence','Impact','Urgence','WTP'],
+    datasets:top4.map((p,i)=>({
+      label:p.id,
+      data:[p.scores.pain,p.scores.freq,p.scores.impact,p.scores.urgence,p.scores.wtp],
+      borderColor:['#d44a4a','#e8944a','#4a8fd4','#3db89a'][i],
+      backgroundColor:['rgba(212,74,74,.1)','rgba(232,148,74,.1)','rgba(74,143,212,.1)','rgba(61,184,154,.1)'][i],
+      borderWidth:1.5,pointRadius:3,
+      pointBackgroundColor:['#d44a4a','#e8944a','#4a8fd4','#3db89a'][i],
+    }))
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    scales:{r:{beginAtZero:true,max:5,ticks:{stepSize:1,color:'#5c5a56',backdropColor:'transparent',font:{size:10}},grid:{color:'rgba(255,255,255,.06)'},angleLines:{color:'rgba(255,255,255,.06)'},pointLabels:{color:'#9d9b95',font:{size:11}}}},
+    plugins:{legend:{labels:{color:'#9d9b95',font:{size:11},boxWidth:12,padding:16}}}
+  }
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const sections=document.querySelectorAll('[data-section]');
+const dots=document.querySelectorAll('.pn-dot');
+const secObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const idx=+e.target.dataset.section;
+      dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+    }
+  });
+},{threshold:.35});
+sections.forEach(s=>secObs.observe(s));
+
+function scrollToSection(i){sections[i]?.scrollIntoView({behavior:'smooth'})}
+
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'';
+    let cur=0;const step=Math.max(1,Math.floor(target/30));
+    const iv=setInterval(()=>{
+      cur=Math.min(cur+step,target);
+      el.textContent=cur+suffix;
+      if(cur>=target)clearInterval(iv);
+    },30);
+    cObs.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cObs.observe(el));
 </script>
+</body>
+</html>
