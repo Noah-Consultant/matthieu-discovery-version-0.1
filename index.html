@@ -1,0 +1,123 @@
+
+<h2 class="sr-only">Analyse interactive des pain points de Matthieu TATIBOUET avec scoring et modules consulting.</h2>
+<style>
+.hdr{font-size:18px;font-weight:500;color:var(--color-text-primary);margin:0 0 2px}
+.sub{font-size:13px;color:var(--color-text-secondary);margin:0 0 20px}
+.sl{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin:16px 0 8px}
+.pc{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin:0 0 10px;cursor:pointer;transition:border-color .2s}
+.pc:hover{border-color:var(--color-border-secondary)}
+.pc .chevron{display:inline-block;transition:transform .2s;font-size:12px;color:var(--color-text-tertiary);margin-left:4px}
+.pc.open .chevron{transform:rotate(90deg)}
+.pc .detail{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.pc.open .detail{max-height:400px}
+.row{display:flex;align-items:center;gap:10px}
+.badge{font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);font-weight:500}
+.b-c{background:var(--color-background-danger);color:var(--color-text-danger)}
+.b-h{background:var(--color-background-warning);color:var(--color-text-warning)}
+.b-m{background:var(--color-background-info);color:var(--color-text-info)}
+.pn{font-size:14px;font-weight:500;color:var(--color-text-primary);flex:1}
+.ps{font-size:14px;font-weight:500;color:var(--color-text-secondary)}
+.sg{display:flex;gap:6px;margin:10px 0 0}
+.sc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:4px 8px;text-align:center;flex:1}
+.sc-l{font-size:10px;color:var(--color-text-tertiary)}
+.sc-v{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.ev{font-size:12px;color:var(--color-text-secondary);font-style:italic;margin:10px 0 0;line-height:1.5}
+.mod{border-left:3px solid var(--color-border-info);padding:6px 12px;margin:10px 0 0;border-radius:0}
+.mod-t{font-size:12px;font-weight:500;color:var(--color-text-info)}
+.mod-d{font-size:11px;color:var(--color-text-secondary);margin:2px 0 0}
+.ad{text-align:center;color:var(--color-text-tertiary);font-size:16px;margin:2px 0}
+.synth{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:4px}
+.scard{border-radius:var(--border-radius-lg);padding:14px;text-align:center}
+.sc-a{background:var(--color-background-danger)}
+.sc-b{background:var(--color-background-warning)}
+.sc-c{background:var(--color-background-info)}
+.scard h3{font-size:14px;font-weight:500;margin:0}
+.scard p{font-size:11px;margin:3px 0 0}
+.muted{opacity:.65}
+</style>
+
+<div class="hdr">Diagnostic Matthieu TATIBOUET</div>
+<div class="sub">Global Grain Manager · Roquette · 23/03/2026 · 117 min</div>
+
+<div class="sl">Pain points par priorité — cliquez pour déplier</div>
+
+<div class="pc" data-toggle>
+ <div class="row"><span class="badge b-c">Critique</span><span class="pn">P2 · Data-prep vs analyse</span><span class="ps">4.75</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
+  <div class="ev">"Tu passes trop de temps à aller chercher la donnée… plutôt qu'à vraiment analyser et décider."</div>
+  <div class="mod"><div class="mod-t">Module A — Pilote "Excel & data-prep"</div><div class="mod-d">Automatiser 60-80% de la data-prep sur 1-2 fichiers critiques</div></div>
+ </div>
+</div>
+<div class="ad">↓</div>
+
+<div class="pc" data-toggle>
+ <div class="row"><span class="badge b-c">Critique</span><span class="pn">P1 · Excels "monstres" & fiabilité</span><span class="ps">4.50</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">5</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
+  <div class="ev">"J'ai des fichiers qui sont devenus des monstres… des trucs un peu incontrôlables."</div>
+  <div class="mod"><div class="mod-t">Module A — Refonte fichiers critiques</div><div class="mod-d">Cartographie + nouvelle version structurée + contrôles de cohérence</div></div>
+ </div>
+</div>
+<div class="ad">↓</div>
+
+<div class="pc" data-toggle>
+ <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P3 · Consolidation multi-pays</span><span class="ps">3.88</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">3</div></div></div>
+  <div class="ev">"Les gens ont des outils différents selon les pays… ça complique vraiment la consolidation."</div>
+  <div class="mod"><div class="mod-t">Module B — Modèle de données global</div><div class="mod-d">Kit reporting standard + harmonisation progressive des équipes locales</div></div>
+ </div>
+</div>
+<div class="ad">↓</div>
+
+<div class="pc" data-toggle>
+ <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P7 · Manque de temps proactif</span><span class="ps">3.50</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
+  <div class="ev">"Je suis trop dans le réactif… et pas assez dans le proactif."</div>
+  <div class="mod"><div class="mod-t">Module C — Cadre coaching acheteurs</div><div class="mod-d">Rituels, supports et contenus pour la communauté achats</div></div>
+ </div>
+</div>
+<div class="ad">↓</div>
+
+<div class="pc" data-toggle>
+ <div class="row"><span class="badge b-h">Élevé</span><span class="pn">P8 · Reporting KPI chronophage</span><span class="ps">3.50</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
+  <div class="ev">"Je passe beaucoup de temps à relancer les équipes locales pour qu'elles remplissent les KPI."</div>
+  <div class="mod"><div class="mod-t">Module B — Automatisation collecte KPI</div><div class="mod-d">Formulaires standardisés + rappels automatiques (écosystème Microsoft)</div></div>
+ </div>
+</div>
+<div class="ad">↓</div>
+
+<div class="pc muted" data-toggle>
+ <div class="row"><span class="badge b-m">Moyen</span><span class="pn">P5 · Jeux politiques & rétention d'info</span><span class="ps">3.25</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">2</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">1</div></div></div>
+  <div class="ev">Hors scope pilote — levier indirect via la transparence data des modules A et B</div>
+ </div>
+</div>
+
+<div class="pc muted" data-toggle>
+ <div class="row"><span class="badge b-m">Moyen</span><span class="pn">P4 · Charge cognitive acheteurs</span><span class="ps">3.13</span><span class="chevron">▶</span></div>
+ <div class="detail">
+  <div class="sg"><div class="sc"><div class="sc-l">Douleur</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">Fréq.</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">Impact</div><div class="sc-v">4</div></div><div class="sc"><div class="sc-l">Urgence</div><div class="sc-v">3</div></div><div class="sc"><div class="sc-l">WTP</div><div class="sc-v">2</div></div></div>
+  <div class="ev">Bénéfice indirect — allègement de la bande passante via Module A</div>
+ </div>
+</div>
+
+<div class="sl" style="margin-top:20px">Synthèse de l'offre pilote</div>
+<div class="synth">
+ <div class="scard sc-a"><h3 style="color:var(--color-text-danger)">Module A</h3><p style="color:var(--color-text-danger)">Excel & data-prep</p><p style="color:var(--color-text-secondary)">P1 + P2 · Quick win</p></div>
+ <div class="scard sc-b"><h3 style="color:var(--color-text-warning)">Module B</h3><p style="color:var(--color-text-warning)">Consolidation & KPI</p><p style="color:var(--color-text-secondary)">P3 + P8 · Phase 2</p></div>
+ <div class="scard sc-c"><h3 style="color:var(--color-text-info)">Module C</h3><p style="color:var(--color-text-info)">Coaching acheteurs</p><p style="color:var(--color-text-secondary)">P7 · Phase 2</p></div>
+</div>
+
+<script>
+document.querySelectorAll('[data-toggle]').forEach(function(card) {
+  card.addEventListener('click', function() {
+    this.classList.toggle('open');
+  });
+});
+</script>
